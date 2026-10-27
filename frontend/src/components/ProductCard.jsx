@@ -1,0 +1,5 @@
+﻿import { Icon } from './ui.jsx'
+import { formatPrice } from '../utils/formatPrice.js'
+
+export function ProductVisual({ product }) { return <div className={`product-image ${product.tone}`}><img src={product.image} alt={`AI-generated demo fashion photograph of a model wearing ${product.name}`} loading="lazy" decoding="async" /></div> }
+export function ProductCard({ product, onOpen, onWishlist, isWishlisted }) { return <article className="product-card"><button className="product-open" onClick={() => onOpen(product)} aria-label={`View ${product.name}`}><ProductVisual product={product} /></button><button className={`product-wishlist ${isWishlisted ? 'active' : ''}`} onClick={() => onWishlist(product.id)} aria-label={`${isWishlisted ? 'Remove' : 'Add'} ${product.name} ${isWishlisted ? 'from' : 'to'} wishlist`}><Icon name="heart" size={18} /></button><button className="product-info product-info-button" onClick={() => onOpen(product)}><p>{product.gender} · {product.category} · AI-generated demo sample</p><h3>{product.name}</h3><strong>{formatPrice(product.price)}</strong></button></article> }

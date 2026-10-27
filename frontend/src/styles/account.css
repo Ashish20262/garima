@@ -1,0 +1,2 @@
+.account-message { margin:0; padding:12px 14px; border-left:2px solid var(--gold); background:#f4ede1; color:var(--navy); font-size:12px; line-height:1.55; }
+.demo-form input[aria-invalid="true"] { border-color:#9b3c32; }

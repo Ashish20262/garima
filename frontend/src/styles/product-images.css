@@ -1,0 +1,7 @@
+﻿.product-image { aspect-ratio:2 / 3; min-height:unset; background:var(--ivory); }
+.product-image::before,.product-image::after { display:none; }
+.product-image img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .25s ease; }
+.product-open:hover .product-image img { transform:scale(1.025); }
+.bag-swatch { overflow:hidden; background-position:center; background-size:cover; }
+.bag-swatch img { display:block; width:100%; height:100%; object-fit:cover; }
+@media (max-width:760px) { .product-image { min-height:unset; } }

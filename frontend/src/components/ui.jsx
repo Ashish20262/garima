@@ -1,0 +1,5 @@
+export function Icon({ name, size = 20 }) {
+  const paths = { search: <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></>, user: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.4 3.1-5 7-5s6.2 1.6 7 5" /></>, heart: <path d="M20.8 5.8a5.3 5.3 0 0 0-7.5 0L12 7.1l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 22l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z" />, bag: <><path d="M5 8.5h14l1 13H4l1-13Z" /><path d="M8.5 9V6a3.5 3.5 0 0 1 7 0v3" /></>, menu: <><path d="M3 6h18M3 12h18M3 18h18" /></>, close: <><path d="m5 5 14 14M19 5 5 19" /></>, arrow: <path d="M5 12h14m-6-6 6 6-6 6" />, minus: <path d="M5 12h14" />, plus: <path d="M12 5v14M5 12h14" /> }
+  return <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>
+}
+export function EmptyState({ title, copy, action }) { return <div className="empty-state"><h2>{title}</h2><p>{copy}</p>{action && <button className="button button-dark" onClick={action.onClick}>{action.label}<Icon name="arrow" size={18} /></button>}</div> }

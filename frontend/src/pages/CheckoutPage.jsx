@@ -1,0 +1,20 @@
+﻿import { useState } from 'react'
+import { products } from '../data/products.js'
+import { formatPrice } from '../utils/formatPrice.js'
+import { EmptyState, Icon } from '../components/ui.jsx'
+
+export default function CheckoutPage({ openView, cart, onOrderConfirmed }) {
+  const [customer, setCustomer] = useState({ name: '', email: '', phone: '', address: '', city: '', state: '', pincode: '' })
+  const [busy, setBusy] = useState(false)
+  const subtotal = cart.reduce((sum, entry) => sum + (products.find((product) => product.id === entry.id)?.price || 0) * entry.quantity, 0)
+  const shipping = subtotal >= 5000 ? 0 : 199
+  const update = (event) => setCustomer((current) => ({ ...current, [event.target.name]: event.target.value }))
+  const submit = (event) => {
+    event.preventDefault()
+    if (busy) return
+    setBusy(true)
+    onOrderConfirmed({ demo: true, orderId: `DEMO-${window.crypto.randomUUID().slice(0, 8).toUpperCase()}`, paymentMethod: 'demo-cod', amount: subtotal + shipping })
+  }
+  if (!cart.length) return <main className="view shell"><button className="back-link" onClick={() => openView('bag')}>← Back to bag</button><EmptyState title="Your bag is empty" copy="Add a piece before continuing to checkout." action={{ label: 'Shop new arrivals', onClick: () => openView('collection', 'All') }} /></main>
+  return <main className="view shell"><button className="back-link" onClick={() => openView('bag')}>← Back to bag</button><p className="kicker">DEMO COD checkout</p><h1>Checkout</h1><p className="view-intro" role="status">Presentation demo only. This simulated cash-on-delivery confirmation does not place an order, contact GARIMA, or save your details. Online payments are disabled.</p><div className="checkout-grid"><form className="checkout-form" onSubmit={submit}><h2>Demo delivery details</h2><label>Full name<input name="name" autoComplete="name" value={customer.name} onChange={update} required maxLength="120" /></label><label>Email address<input name="email" type="email" autoComplete="email" value={customer.email} onChange={update} required maxLength="254" /></label><label>Mobile number<input name="phone" type="tel" autoComplete="tel" value={customer.phone} onChange={update} required maxLength="16" /></label><label>Street address<textarea name="address" autoComplete="street-address" value={customer.address} onChange={update} required maxLength="200" rows="3" /></label><div className="checkout-fields"><label>City<input name="city" autoComplete="address-level2" value={customer.city} onChange={update} required maxLength="100" /></label><label>State<input name="state" autoComplete="address-level1" value={customer.state} onChange={update} required maxLength="100" /></label><label>PIN code<input name="pincode" inputMode="numeric" autoComplete="postal-code" pattern="[0-9]{6}" value={customer.pincode} onChange={update} required maxLength="6" /></label></div><fieldset className="payment-method"><legend>Payment method</legend><label><input name="payment" type="radio" value="cod" checked readOnly /> DEMO cash on delivery</label><p>Simulated only. No parcel or collection will follow.</p></fieldset><button className="button button-dark" type="submit" disabled={busy}>Simulate DEMO COD checkout <Icon name="arrow" size={18} /></button><p className="storage-notice">Your entries stay in this page only and are not sent or stored.</p></form><aside className="checkout-summary"><h2>Demo order summary</h2>{cart.map((entry) => { const product = products.find((item) => item.id === entry.id); return product ? <div className="checkout-line" key={`${entry.id}-${entry.size}`}><span>{product.name} · {entry.size} × {entry.quantity}</span><strong>{formatPrice(product.price * entry.quantity)}</strong></div> : null })}<div className="checkout-line"><span>Shipping</span><strong>{shipping === 0 ? 'Complimentary' : formatPrice(shipping)}</strong></div><div className="checkout-total"><span>Demo total</span><strong>{formatPrice(subtotal + shipping)}</strong></div></aside></div></main>
+}

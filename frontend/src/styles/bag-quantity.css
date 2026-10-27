@@ -1,0 +1,2 @@
+.quantity button:disabled { cursor:not-allowed; color:#aaa49b; background:#f1ede6; opacity:.65; }
+.quantity button:disabled svg { opacity:.55; }
