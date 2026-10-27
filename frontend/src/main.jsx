@@ -5,6 +5,7 @@ import './styles/interactions.css'
 import './styles/product-images.css'
 import './styles/account.css'
 import './styles/bag-quantity.css'
+import './styles/responsive.css'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(

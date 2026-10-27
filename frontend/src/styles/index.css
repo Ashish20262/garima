@@ -14,3 +14,16 @@
   .nav-actions .icon-button { width: 28px; height: 28px; }
   .nav-actions .icon-button:nth-child(-n+2) { display: grid; }
 }
+
+/* Appointment promotion contrast and button interaction states. */
+.promotion h2 { color:var(--ivory); }
+.promotion p:not(.kicker) { color:var(--ivory); }
+.promotion .button-outline { border:1px solid #d2b477; background:#d2b477; color:var(--navy); }
+.promotion .button-outline:hover { border-color:var(--ivory); background:var(--ivory); color:var(--navy); }
+.promotion .button-outline:focus-visible { outline:3px solid var(--ivory); outline-offset:3px; }
+.promotion .button-outline:active { border-color:#b99555; background:#b99555; color:var(--navy); }
+
+/* Fashion photography is scoped to the two collection cards only. */
+.category-card.men::before { background-image:linear-gradient(90deg,rgba(7,27,53,.68),rgba(7,27,53,.08)),linear-gradient(0deg,rgba(7,27,53,.34),transparent 58%),url('../assets/collection-men.png'); background-size:cover; background-position:center 38%; }
+.category-card.women::before { background-image:linear-gradient(90deg,rgba(7,27,53,.68),rgba(7,27,53,.08)),linear-gradient(0deg,rgba(7,27,53,.34),transparent 58%),url('../assets/collection-women.png'); background-size:cover; background-position:center 38%; }
+.category-card .kicker { color:#e2c98f; }

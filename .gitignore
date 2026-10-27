@@ -5,14 +5,18 @@ node_modules/
 dist/
 build/
 coverage/
+.demo-build-check/
+.vite/
+.vercel/
 
 # Local environment settings (templates remain tracked)
 .env
 .env.local
-.env.*.local
+.env.*
 !.env.example
 
 # Logs and editor files
 *.log
+npm-debug.log*
 .DS_Store
 .vscode/
